@@ -13,8 +13,11 @@
 
 
     <form class="authform" method="post">
-        <label><input type="text" name="login" placeholder="Фамилия"></label>
-        <label><input type="date" name="login" placeholder="Дата рождения"></label>
+        <label class="select" for="surname">Пользователь <select id="surname" name="fruits">
+                <option value="surname">Васька</option>
+            </select>
+        </label>
+        <label><input type="text" name="text" placeholder="Номер телефона"></label>
         <button>Добавить</button>
     </form>
     </div>
@@ -30,7 +33,8 @@
             <option value="office">Офис</option>
         </select>
         </label>
-        <label><input type="password" name="password" placeholder="Пароль"></label>
+        <label><input type="text" name="text" placeholder="Название"></label>
+        <label><input type="text" name="text" placeholder="Подразделение"></label>
         <button>Добавить</button>
     </form>
 </div>

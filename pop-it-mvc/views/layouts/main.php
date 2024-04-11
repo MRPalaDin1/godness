@@ -13,19 +13,26 @@
     <nav>
         <a href="<?= app()->route->getUrl('/hello') ?>">Главная</a>
         <?php
-        if (!app()->auth::check()):
+        if (!app()->auth::check() ):
             ?>
             <a href="<?= app()->route->getUrl('/login') ?>">Вход</a>
-            <a href="<?= app()->route->getUrl('/signup') ?>">Регистрация</a>
+
+        <?php
+        elseif (app()->auth->user()->role == '1'):
+            ?>
+            <a href="<?= app()->route->getUrl('/signup') ?>">Регистрировать</a>
+            <a href="<?= app()->route->getUrl('/logout') ?>">Выйти</a>
+
         <?php
         else:
             ?>
-            <a href="<?= app()->route->getUrl('/logout') ?>">Выход (<?= app()->auth::user()->name ?>)</a>
+        <a href="<?= app()->route->getUrl('/logout') ?>">Выйти</a>
         <?php
         endif;
         ?>
     </nav>
 </header>
+
 <main>
     <?= $content ?? '' ?>
 </main>
