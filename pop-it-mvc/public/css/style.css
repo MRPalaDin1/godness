@@ -1,0 +1,116 @@
+body{
+    margin: 0;
+    padding: 0;
+    color: black;
+    font-family: Carlito;
+}
+
+header{
+    background-color: #D9D9D9;
+    height: 80px;
+    border-bottom: 2px solid black;
+    margin-bottom: 2%;
+}
+
+
+a{
+    padding: 10px 30px;
+    background-color: white;
+    border: none;
+    border-radius: 30px;
+    margin: 12px;
+    color: black;
+    text-decoration: none;
+    width: auto;
+    height: 20px;
+
+}
+
+nav{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: right;
+}
+.auth{
+    background-color: #D9D9D9;
+    width: 450px;
+    height: 470px;
+    border-radius: 30px;
+    border: 2px solid black;
+    margin: auto;
+}
+
+.authh2{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    font-size: 35px;
+
+}
+
+.authform{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 5px;
+}
+
+input, button,.select{
+    width: 340px;
+    height: 55px;
+    background-color: white;
+    border: none;
+    border-radius: 30px;
+    margin: 12px;
+}
+::placeholder {
+    color: black;
+    padding-left: 25px;
+}
+
+.otherbut{
+
+    padding: 10px 30px;
+    background-color: white;
+    border: none;
+    border-radius: 30px;
+    margin: 12px;
+    margin-left: 250px;
+    color: black;
+    text-decoration: none;
+    width: 340px;
+    height: 55px;
+}
+
+.func{
+    background-color: #D9D9D9;
+    width: 410px;
+    height: auto;
+    border-radius: 30px;
+    border: 2px solid black;
+}
+
+.head{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-around;
+}
+
+.select{
+    display: flex;
+    align-items: baseline;
+    justify-content: space-around;
+}
+
+select{
+    border: none;
+    background-color: #D9D9D9;
+    border-radius: 30px;
+    padding: 5px;
+    margin: 13px 30px;
+}
+
