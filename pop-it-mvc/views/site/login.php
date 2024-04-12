@@ -10,6 +10,5 @@ if (!app()->auth::check()):
         <label><input type="password" name="password" placeholder="Пароль"></label>
         <button>Войти</button>
     </form>
-    <a class="otherbut" href="<?= app()->route->getUrl('/signup') ?>">Регистрация</a>
 </div>
 <?php endif;

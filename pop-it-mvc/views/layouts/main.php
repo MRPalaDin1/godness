@@ -11,16 +11,22 @@
 <body>
 <header>
     <nav>
-        <a href="<?= app()->route->getUrl('/hello') ?>">Главная</a>
+
         <?php
         if (!app()->auth::check() ):
             ?>
-            <a href="<?= app()->route->getUrl('/login') ?>">Вход</a>
+
+
 
         <?php
-        elseif (app()->auth->user()->role == '1'):
+        elseif (app()->auth->user()->id_role == '1'):
             ?>
-            <a href="<?= app()->route->getUrl('/signup') ?>">Регистрировать</a>
+            <a href="<?= app()->route->getUrl('/logout') ?>">Выйти</a>
+        <?php
+        elseif (app()->auth->user()->id_role == '0'):
+            ?>
+            <a href="<?= app()->route->getUrl('/view') ?>">Просмотр</a>
+            <a href="<?= app()->route->getUrl('/hello') ?>">Главная</a>
             <a href="<?= app()->route->getUrl('/logout') ?>">Выйти</a>
 
         <?php

@@ -22,9 +22,10 @@ class Site
     public function signup(Request $request): string
     {
         if ($request->method === 'POST' && User::create($request->all())) {
-            app()->route->redirect('/signup');
-        }
+            if(app()->auth->user()->id_role == '1'){app()->route->redirect('/signup');
+        }}
         return new View('site.signup');
+
     }
 
     public function login(Request $request): string
@@ -34,9 +35,13 @@ class Site
             return new View('site.login');
         }
         //Если удалось аутентифицировать пользователя, то редирект
-        if (Auth::attempt($request->all())) {
-            app()->route->redirect('/hello');
+        if (Auth::attempt($request->all()))
+        {
+            if(app()->auth->user()->id_role == '0')
+                {app()->route->redirect('/hello');
         }
+            elseif (app()->auth->user()->id_role == '1')
+                {app()->route->redirect('/signup');}}
         //Если аутентификация не удалась, то сообщение об ошибке
         return new View('site.login', ['message' => 'Неправильные логин или пароль']);
     }
@@ -46,4 +51,10 @@ class Site
         Auth::logout();
         app()->route->redirect('/hello');
     }
+
+    public function view(): string
+{
+    return new View('site.view', ['message' => 'hello working']);
+}
+
 }

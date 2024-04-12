@@ -1,6 +1,6 @@
 <?php
-if (app()->auth->user()->role ?? 'admin'):
-    ?><div class="auth"><h2 class="authh2">Регистрировать</h2>
+if (app()->auth->user()->id_role == '1'):?>
+    <div class="auth"><h2 class="authh2">Регистрировать</h2>
     <form class="authform" method="post">
         <label><input type="text" name="login" placeholder="Логин"></label>
         <label><input type="password" name="password" placeholder="Пароль"></label>
@@ -11,6 +11,6 @@ if (app()->auth->user()->role ?? 'admin'):
 else:
     ?>
 
-    <a>Вы не батька(</a>
+    <h2>Вы не батька(</h2>
 <?php
 endif;

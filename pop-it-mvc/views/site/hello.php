@@ -1,4 +1,6 @@
-<div class="head"><div class="func"><h2 class="authh2">Создание абонента</h2>
+<?php
+if (app()->auth->user()->id_role == '0'):?>
+<div class="head"><div class="func"><h2 class="funch2">Создание абонента</h2>
     <form class="authform" method="post">
         <label><input type="text" name="login" placeholder="Имя"></label>
         <label><input type="text" name="password" placeholder="Фамилия"></label>
@@ -9,9 +11,7 @@
     </form>
 </div>
 
-<div class="func"><h2 class="authh2">Прикрепление к телефону</h2>
-
-
+<div class="func"><h2 class="funch2">Прикрепление к телефону</h2>
     <form class="authform" method="post">
         <label class="select" for="surname">Пользователь <select id="surname" name="fruits">
                 <option value="surname">Васька</option>
@@ -23,7 +23,7 @@
     </div>
 
 
-<div class="func"><h2 class="authh2">Создание помещения</h2>
+<div class="func"><h2 class="funch2">Создание помещения</h2>
 
     <form class="authform" method="post">
         <label class="select" for="room">Вид помещения
@@ -40,7 +40,7 @@
 </div>
 
 
-<div class="func"><h2 class="authh2">Создание подразделения</h2>
+<div class="func"><h2 class="funch2">Создание подразделения</h2>
 
     <form class="authform" method="post">
         <label><input type="text" name="login" placeholder="Название"></label>
@@ -55,7 +55,7 @@
 </div>
 
 
-<div class="func"><h2 class="authh2">Создание телефона</h2>
+<div class="func"><h2 class="funch2">Создание телефона</h2>
 
     <form class="authform" method="post">
         <label><input type="text" name="login" placeholder="Номер"></label>
@@ -67,3 +67,10 @@
     </form>
 </div>
 </div>
+
+<?php
+else:
+    ?>
+    <h2>Вы батька(</h2>
+<?php
+endif;
