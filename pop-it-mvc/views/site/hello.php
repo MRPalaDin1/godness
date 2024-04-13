@@ -6,7 +6,11 @@ if (app()->auth->user()->id_role == '0'):?>
         <label><input type="text" name="password" placeholder="Фамилия"></label>
         <label><input type="text" name="login" placeholder="Отчество"></label>
         <label><input type="date" name="password" placeholder="Дата рождения"></label>
-        <label><input type="text" name="login" placeholder="Подразделение"></label>
+        <label class="select" for="room">Подразделение
+            <select id="room" name="fruits">
+                <option value="class">Номер</option>
+            </select>
+        </label>
         <button>Добавить</button>
     </form>
 </div>
@@ -34,7 +38,11 @@ if (app()->auth->user()->id_role == '0'):?>
         </select>
         </label>
         <label><input type="text" name="text" placeholder="Название"></label>
-        <label><input type="text" name="text" placeholder="Подразделение"></label>
+        <label class="select" for="room">Подразделение
+            <select id="room" name="fruits">
+                <option value="class">Номер</option>
+            </select>
+        </label>
         <button>Добавить</button>
     </form>
 </div>
