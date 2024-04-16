@@ -2,30 +2,112 @@
 
 namespace Controller;
 
-use Model\Post;
+use Model\Abonents;
+use Model\Divisions;
+use Model\NumAbonent;
+use Model\Room;
+use Model\Telephone;
 use Model\User;
 use Src\Auth\Auth;
 use Src\Request;
 use Src\Validator\Validator;
 use Src\View;
+use Illuminate\Database\Capsule\Manager as DB;
 
 class Site
 {
     public function index(Request $request): string
     {
-        $posts = Post::where('id', $request->id)->get();
+        $posts = telephone::where('id', $request->id)->get();
         return (new View())->render('site.post', ['posts' => $posts]);
     }
-    public function hello(): string
+    public function hello(Request $request): string
     {
-        return new View('site.hello', ['message' => 'hello working']);
+        $divisions = Divisions::all();
+        $rooms = Room::all();
+        $abonents = Abonents::all();
+        $telephones = Telephone::all();
+
+/*        if ($request->method === 'POST') {
+            $name = $request->get('name');
+            $surname = $request->get('surname');
+            $patron = $request->get('patron');
+            $date = $request->get('date');
+
+            if (Abonents::create($request->all())) {
+                app()->route->redirect('/hello');
+            }
+        }
+
+        if ($request->method === 'POST') {
+            $abonentId = Abonents::where('id_abonents', $request->get('abonent'))->first()->id_abonents;
+            $numAbonent = NumAbonent::where('id_abonents', $abonentId)->first();
+            var_dump($abonentId);
+            $telephones = $numAbonent->telephones()->get();
+            var_dump($telephones);
+
+            return new View('site.hello', ['abonents' => $abonents, 'telephones' => $telephones, 'divisions'=>$divisions]);
+        }*/
+
+        return new View('site.hello',['abonents'=>$abonents, 'telephones'=>$telephones, 'divisions'=>$divisions, 'rooms'=>$rooms]);
+
     }
+
+
+    public function attatel(Request $request): string
+    {
+        if ($request->method === 'POST') {
+            NumAbonent::create($request->all());
+            app()->route->redirect('/hello');
+        }
+    }
+
+    public function createroom(Request $request): string
+    {
+
+        /*if ($request->method === 'POST') {
+            $room_num = Room::where('room_num', $request->get('room'))->first()->room_num;
+
+            var_dump($room_num);
+
+            $divisions = $divisions->division()->get();
+
+            var_dump($divisions);
+            return new View('site.hello',['divisions'=>$divisions, 'rooms'=>$rooms]);
+        }*/
+
+        if ($request->method === 'POST') {
+            Telephone::create($request->all());
+            app()->route->redirect('/login');
+        }
+    }
+
+    public function createtel(Request $request): string
+    {
+
+        /*if ($request->method === 'POST') {
+            $room_num = Room::where('room_num', $request->get('room'))->first()->room_num;
+
+            var_dump($room_num);
+
+            $divisions = $divisions->division()->get();
+
+            var_dump($divisions);
+            return new View('site.hello',['divisions'=>$divisions, 'rooms'=>$rooms]);
+        }*/
+
+        if ($request->method === 'POST') {
+            Telephone::create($request->all());
+            app()->route->redirect('/login');
+        }
+    }
+
 
     public function signup(Request $request): string
     {
         if ($request->method === 'POST') {
 
-            $validator = new Validator($request->all(), [
+                   $validator = new Validator($request->all(), [
                 'login' => ['required', 'unique:users,login'],
                 'password' => ['required']
             ], [
@@ -45,14 +127,6 @@ class Site
         return new View('site.signup');
     }
 
-
-    /*public function signup(Request $request): string
-    {
-        if ($request->method === 'POST' && User::create($request->all())) {
-            if(app()->auth->user()->id_role == '1'){app()->route->redirect('/signup');
-            }}
-        return new View('site.signup');
-    }*/
     public function login(Request $request): string
     {
         //Если просто обращение к странице, то отобразить форму
@@ -73,14 +147,39 @@ class Site
 
     public function logout(): void
     {
+
         Auth::logout();
         app()->route->redirect('/hello');
     }
 
-    public function view(): string
-{
-    return new View('site.view', ['message' => 'hello working']);
-}
+    public function view(Request $request): string
+    {
+        $abonents = Abonents::all();
+
+        if ($request->method === 'POST') {
+            $abonentId = Abonents::where('id_abonents', $request->get('abonent'))->first()->id_abonents;
+            $numAbonent = NumAbonent::where('id_abonents', $abonentId)->first();
+
+            var_dump($abonentId);
+            echo "<br>";
+            var_dump($numAbonent->id_abonents);
+
+//            $telephones = $abonentId->num_abonent->telephones()->get();
+
+            $telephones = $numAbonent->telephones()->get();
+
+//            var_dump($telephones);
+
+
+            return new View('site.view', ['abonents' => $abonents, 'telephones' => $telephones]);
+        }
+
+
+        return new View('site.view',['abonents'=>$abonents]);
+
+
+    }
+
 
 }
 
