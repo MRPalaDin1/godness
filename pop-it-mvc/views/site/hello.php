@@ -40,15 +40,27 @@ if (app()->auth->user()->id_role == '0'):?>
 
         <div class="func"><h2 class="funch2">Создание помещения</h2>
 
-            <form class="authform" method="post" action="/createroom">
+            <form class="authform" method="post" action="<?= app()->settings->getRootPath() ?>/createroom">
                 <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
-                <label><input type="text" name="login" placeholder="Вид помещения"></label>
-                <label><input type="text" name="text" placeholder="Название"></label>
+                <label class="select" for="rooms">Вид помещения<select id="room" name="room">
+                        <option value="Комната">Комната</option>
+                        <option value="Офис">Офис</option>
+                        <option value="Аудитория">Аудитория</option>
+                    </select>
+                </label>
+                <label><input type="text" name="title" placeholder="Название"></label>
                 <label class="select" for="room">Подразделение
-                    <select id="room" name="fruits">
-                        <?php foreach ($divisions as $division): ?>
-                            <option><?php echo $division->title; ?></option>
-                        <?php endforeach; ?>
+                    <select id="telephone" name="id_division">
+                        <?php
+                        foreach ($divisions as $division) {
+                            echo "<option label='$division->title'>$division->id_division</option>";
+                        }
+                        ?>
+                    </select>
+                    <select id="type" name="view">
+                        <?php
+                        foreach ($types as $type) {
+                            echo "<option label='$type->room_type'>$type->id_room_type</option>";
                         }
                         ?>
                     </select>
@@ -59,13 +71,14 @@ if (app()->auth->user()->id_role == '0'):?>
 
         <div class="func"><h2 class="funch2">Создание подразделения</h2>
 
-            <form class="authform" method="post">
+            <form class="authform" method="post" action="<?= app()->settings->getRootPath() ?>/creatediv">
                 <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
-                <label><input type="text" name="login" placeholder="Название"></label>
+                <label><input type="text" name="view" placeholder="Название"></label>
+                <label><input type="text" name="title" placeholder="Номер"></label>
                 <label class="select" for="rooms">Вид <select id="rooms" name="fruits">
-                        <option value="lives">Жилое</option>
-                        <option value="product">Производственное</option>
-                        <option value="marketing">Маркетинговое</option>
+                        <option value="Жилое">Жилое</option>
+                        <option value="Производственное">Производственное</option>
+                        <option value="Маркетинговое">Маркетинговое</option>
                     </select>
                 </label>
                 <button>Добавить</button>
@@ -76,11 +89,13 @@ if (app()->auth->user()->id_role == '0'):?>
 
             <form class="authform" method="post" action="<?= app()->settings->getRootPath() ?>/createtel">
                 <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
-                <label><input type="text" name="login" placeholder="Номер"></label>
-                <label class="select" for="roomes">Помещение <select id="roomes" name="fruits">
-                        <?php foreach ($rooms as $room): ?>
-                            <option><?php echo $room->title; ?></option>
-                        <?php endforeach; ?>
+                <label><input type="text" name="num" placeholder="Номер"></label>
+                <label class="select" for="roomes">Помещение <select id="roomes" name="room_num">
+                        <?php
+                        foreach ($rooms as $room) {
+                            echo "<option label='$room->title'>$room->room_num</option>";
+                        }
+                        ?>
                     </select>
                 </label>
                 <button type="submit">Добавить</button>

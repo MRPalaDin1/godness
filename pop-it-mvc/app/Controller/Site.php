@@ -6,6 +6,7 @@ use Model\Abonents;
 use Model\Divisions;
 use Model\NumAbonent;
 use Model\Room;
+use Model\RoomType;
 use Model\Telephone;
 use Model\User;
 use Src\Auth\Auth;
@@ -27,8 +28,9 @@ class Site
         $rooms = Room::all();
         $abonents = Abonents::all();
         $telephones = Telephone::all();
+        $types = RoomType::all();
 
-/*        if ($request->method === 'POST') {
+        if ($request->method === 'POST') {
             $name = $request->get('name');
             $surname = $request->get('surname');
             $patron = $request->get('patron');
@@ -39,17 +41,7 @@ class Site
             }
         }
 
-        if ($request->method === 'POST') {
-            $abonentId = Abonents::where('id_abonents', $request->get('abonent'))->first()->id_abonents;
-            $numAbonent = NumAbonent::where('id_abonents', $abonentId)->first();
-            var_dump($abonentId);
-            $telephones = $numAbonent->telephones()->get();
-            var_dump($telephones);
-
-            return new View('site.hello', ['abonents' => $abonents, 'telephones' => $telephones, 'divisions'=>$divisions]);
-        }*/
-
-        return new View('site.hello',['abonents'=>$abonents, 'telephones'=>$telephones, 'divisions'=>$divisions, 'rooms'=>$rooms]);
+        return new View('site.hello',['abonents'=>$abonents, 'telephones'=>$telephones, 'divisions'=>$divisions, 'rooms'=>$rooms, 'types' => $types]);
 
     }
 
@@ -65,40 +57,30 @@ class Site
     public function createroom(Request $request): string
     {
 
-        /*if ($request->method === 'POST') {
-            $room_num = Room::where('room_num', $request->get('room'))->first()->room_num;
-
-            var_dump($room_num);
-
-            $divisions = $divisions->division()->get();
-
-            var_dump($divisions);
-            return new View('site.hello',['divisions'=>$divisions, 'rooms'=>$rooms]);
-        }*/
-
         if ($request->method === 'POST') {
-            Telephone::create($request->all());
-            app()->route->redirect('/login');
+            Room::create($request->all());
+            app()->route->redirect('/hello');
         }
+
+        return new View('site.hello');
+
     }
 
     public function createtel(Request $request): string
     {
 
-        /*if ($request->method === 'POST') {
-            $room_num = Room::where('room_num', $request->get('room'))->first()->room_num;
-
-            var_dump($room_num);
-
-            $divisions = $divisions->division()->get();
-
-            var_dump($divisions);
-            return new View('site.hello',['divisions'=>$divisions, 'rooms'=>$rooms]);
-        }*/
-
         if ($request->method === 'POST') {
             Telephone::create($request->all());
-            app()->route->redirect('/login');
+            app()->route->redirect('/hello');
+        }
+    }
+
+    public function creatediv(Request $request): string
+    {
+
+        if ($request->method === 'POST') {
+            Divisions::create($request->all());
+            app()->route->redirect('/hello');
         }
     }
 
@@ -155,6 +137,28 @@ class Site
     public function view(Request $request): string
     {
         $abonents = Abonents::all();
+        $divisions = Divisions::all();
+        $rooms = Room::all();
+        $telephones = Telephone::all();
+        $types = RoomType::all();
+
+        if ($request->method === 'POST') {
+            $abonentId = Abonents::where('id_abonents', $request->get('abonent'))->first()->id_abonents;
+            $numAbonent = NumAbonent::where('id_abonents', $abonentId)->first();
+
+            $telephones = $numAbonent->telephones()->get();
+
+            return new View('site.view', ['abonents'=>$abonents, 'telephones'=>$telephones, 'divisions'=>$divisions, 'rooms'=>$rooms, 'types' => $types]);
+        }
+
+
+        return new View('site.view',['abonents'=>$abonents, 'telephones'=>$telephones, 'divisions'=>$divisions, 'rooms'=>$rooms, 'types' => $types]);
+
+
+    }}
+
+/*    public function viewdiv(Request $request): string
+    {
 
         if ($request->method === 'POST') {
             $abonentId = Abonents::where('id_abonents', $request->get('abonent'))->first()->id_abonents;
@@ -164,23 +168,25 @@ class Site
             echo "<br>";
             var_dump($numAbonent->id_abonents);
 
-//            $telephones = $abonentId->num_abonent->telephones()->get();
-
             $telephones = $numAbonent->telephones()->get();
 
-//            var_dump($telephones);
-
-
-            return new View('site.view', ['abonents' => $abonents, 'telephones' => $telephones]);
         }
-
-
-        return new View('site.view',['abonents'=>$abonents]);
-
 
     }
 
+public function viewdivroom(Request $request): string
+{
 
-}
+    if ($request->method === 'POST') {
+        $abonentId = Abonents::where('id_abonents', $request->get('abonent'))->first()->id_abonents;
+        $numAbonent = NumAbonent::where('id_abonents', $abonentId)->first();
 
+        var_dump($abonentId);
+        echo "<br>";
+        var_dump($numAbonent->id_abonents);
 
+        $telephones = $numAbonent->telephones()->get();
+
+    }
+
+}*/

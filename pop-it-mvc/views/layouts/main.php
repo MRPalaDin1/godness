@@ -26,11 +26,7 @@
         elseif (app()->auth->user()->id_role == '0'):
             ?>
             <a href="<?= app()->route->getUrl('/view') ?>">Просмотр</a>
-            <a href="<?= app()->route->getUrl('/hello') ?>">Создание абонента</a>
-            <a href="<?= app()->route->getUrl('/attatel') ?>">Прикрепление к телефону</a>
-            <a href="<?= app()->route->getUrl('/createroom') ?>">Создание помещения</a>
-            <a href="<?= app()->route->getUrl('/creatediv') ?>">Создание подразделения</a>
-            <a href="<?= app()->route->getUrl('/cteatetel') ?>">Создание телефона</a>
+            <a href="<?= app()->route->getUrl('/hello') ?>">Создание</a>
             <a href="<?= app()->route->getUrl('/logout') ?>">Выйти</a>
 
         <?php
