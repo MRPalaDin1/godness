@@ -9,11 +9,11 @@ if (app()->auth->user()->id_role == '0'):?>
                 <select id="telephone" name="id_division">
                     <?php
                     foreach ($divisions as $division) {
-                        echo "<option label='$division->title'>$division->id_division</option>";
+                        echo "<option label='$division->view'>$division->id_division</option>";
                     }
                     ?>
                 </select>
-                <select id="type" name="view">
+                <select id="type" name="id_room_type">
                     <?php
                     foreach ($types as $type) {
                         echo "<option label='$type->room_type'>$type->id_room_type</option>";
@@ -24,20 +24,13 @@ if (app()->auth->user()->id_role == '0'):?>
             <button>Просмотр</button>
         </form>
 
-        <div>
-            <h2>Номера подразделения: </h2>
-            <?php
-            foreach ($telephones as $telephone) {
-                var_dump($telephone->num);
-            }
-            ?>
-        </div>
+
     </div>
 
 
     <div class="func"><h2 class="funch2">Выбор номеров пользователя</h2>
 
-        <form class="authform" method="post" action="<?= app()->settings->getRootPath() ?>/viewdivroom">
+        <form class="authform" method="post" action="<?= app()->settings->getRootPath() ?>/view-phone">
             <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
             <label class="select" for="room">Пользователь
                 <select name="abonent">
@@ -53,21 +46,12 @@ if (app()->auth->user()->id_role == '0'):?>
             <button type="submit">Просмотр</button
         </form>
 
-        <div>
-            <h2>Номера пользователя: </h2>
-            <?php
-            foreach ($telephones as $telephone) {
-                var_dump($telephone->num);
-            }
-            ?>
-        </div>
-
     </div>
 
 
-    <div class="func"><h2 class="funch2">Выбор пользователей по подразделениям и помещениям</h2>
+    <div class="func"><h2 class="funch2">Выбор пользователей по подразделениям</h2>
 
-        <form class="authform" method="post">
+        <form class="authform" method="post" action="<?= app()->settings->getRootPath() ?>/viewdivroom">
             <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
             <label class="select" for="room">Подразделение
                 <select id="telephone" name="id_division">
@@ -85,6 +69,16 @@ if (app()->auth->user()->id_role == '0'):?>
                     ?>
                 </select>
             </label>
+
+            <button>Просмотр</button>
+        </form>
+
+    </div>
+
+    <div class="func"><h2 class="funch2">Выбор пользователей по помещениям</h2>
+
+        <form class="authform" method="post" action="<?= app()->settings->getRootPath() ?>/viewroom">
+            <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
             <label class="select" for="roomes">Помещение <select id="roomes" name="room_num">
                     <?php
                     foreach ($rooms as $room) {
@@ -95,15 +89,6 @@ if (app()->auth->user()->id_role == '0'):?>
             </label>
             <button>Просмотр</button>
         </form>
-
-        <div>
-            <h2>Пользователи: </h2>
-            <?php
-            foreach ($telephones as $telephone) {
-                var_dump($telephone->num);
-            }
-            ?>
-        </div>
 
     </div>
 </div>

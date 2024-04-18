@@ -1,13 +1,13 @@
 <?php
 if (app()->auth->user()->id_role == '0'):?>
 <div class="head"><div class="func"><h2 class="funch2">Создание абонента</h2>
-    <form class="authform" method="post">
+    <form class="authform" method="post" enctype="multipart/form-data">
         <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
         <label><input type="text" name="name" placeholder="Имя"></label>
         <label><input type="text" name="surname" placeholder="Фамилия"></label>
         <label><input type="text" name="patron" placeholder="Отчество"></label>
         <label><input type="date" name="date" placeholder="Дата рождения (ггггммдд)"></label>
-
+        <label><input type="file" name="img" placeholder="Фото"></label>
         <button type="submit">Добавить</button>
     </form>
     </div>
@@ -53,7 +53,7 @@ if (app()->auth->user()->id_role == '0'):?>
                     <select id="telephone" name="id_division">
                         <?php
                         foreach ($divisions as $division) {
-                            echo "<option label='$division->title'>$division->id_division</option>";
+                            echo "<option label='$division->view'>$division->id_division</option>";
                         }
                         ?>
                     </select>
