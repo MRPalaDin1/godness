@@ -203,14 +203,13 @@ class Site
     {
         if ($request->method === 'POST') {
             $division = Divisions::where('id_division', $request->get('id_division'))->first();
-            var_dump($division->telephones->count());
+            $countDivision = $division->telephones->count();
             $countAbonents = 0;
             foreach ($division->telephones as $telephone) {
                 $countAbonents += $telephone->abonents->count();
             }
-            var_dump($countAbonents);
 
-            return new View('site.viewdivroom');
+            return new View('site.viewdivroom', ['countabonent' => $countAbonents,'countDivision'=> $countDivision]);
         }
         app()->route->redirect('/viewdivroom');
     }
@@ -219,13 +218,12 @@ class Site
     {
         if ($request->method === 'POST') {
             $room = Room::where('room_num', $request->get('room_num'))->first();
-            var_dump($room->telephones->count());
+            $countRoom = $room->telephones->count();
             $countAbonents = 0;
             foreach ($room->telephones as $telephone) {
                 $countAbonents += $telephone->abonents->count();
             }
-            var_dump($countAbonents);
-            return new View('site.viewroom');
+            return new View('site.viewroom', ['countRoom'=> $countRoom,'countabonent' => $countAbonents,]);
         }
     }
 }
