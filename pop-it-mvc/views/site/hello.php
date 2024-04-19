@@ -3,11 +3,11 @@ if (app()->auth->user()->id_role == '0'):?>
 <div class="head"><div class="func"><h2 class="funch2">Создание абонента</h2>
     <form class="authform" method="post" enctype="multipart/form-data">
         <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
-        <label><input type="text" name="name" placeholder="Имя"></label>
-        <label><input type="text" name="surname" placeholder="Фамилия"></label>
-        <label><input type="text" name="patron" placeholder="Отчество"></label>
-        <label><input type="date" name="date" placeholder="Дата рождения (ггггммдд)"></label>
-        <label><input type="file" name="img" placeholder="Фото"></label>
+        <label><input type="text" name="name" placeholder="Имя" required></label>
+        <label><input type="text" name="surname" placeholder="Фамилия" required></label>
+        <label><input type="text" name="patron" placeholder="Отчество" required</label>
+        <label><input type="date" name="date" placeholder="Дата рождения (ггггммдд)" required></label>
+        <label><input type="file" name="img" placeholder="Фото" required></label>
         <button type="submit">Добавить</button>
     </form>
     </div>
@@ -48,7 +48,7 @@ if (app()->auth->user()->id_role == '0'):?>
                         <option value="Аудитория">Аудитория</option>
                     </select>
                 </label>
-                <label><input type="text" name="title" placeholder="Название"></label>
+                <label><input type="text" name="title" placeholder="Название" required></label>
                 <label class="select" for="room">Подразделение
                     <select id="telephone" name="id_division">
                         <?php
@@ -73,8 +73,8 @@ if (app()->auth->user()->id_role == '0'):?>
 
             <form class="authform" method="post" action="<?= app()->settings->getRootPath() ?>/creatediv">
                 <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
-                <label><input type="text" name="view" placeholder="Название"></label>
-                <label><input type="text" name="title" placeholder="Номер"></label>
+                <label><input type="text" name="view" placeholder="Название" required></label>
+                <label><input type="text" name="title" placeholder="Номер" required></label>
                 <label class="select" for="rooms">Вид <select id="rooms" name="fruits">
                         <option value="Жилое">Жилое</option>
                         <option value="Производственное">Производственное</option>
@@ -89,7 +89,7 @@ if (app()->auth->user()->id_role == '0'):?>
 
             <form class="authform" method="post" action="<?= app()->settings->getRootPath() ?>/createtel">
                 <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
-                <label><input type="text" name="num" placeholder="Номер"></label>
+                <label><input type="text" name="num" placeholder="Номер" required></label>
                 <label class="select" for="roomes">Помещение <select id="roomes" name="room_num">
                         <?php
                         foreach ($rooms as $room) {

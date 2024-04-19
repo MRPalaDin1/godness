@@ -13,7 +13,7 @@ Route::add(['GET', 'POST'], '/attatel', [Controller\Site::class, 'attatel']);
 Route::add(['GET', 'POST'], '/creatediv', [Controller\Site::class, 'creatediv']);
 Route::add(['GET', 'POST'], '/createroom', [Controller\Site::class, 'createroom']);
 Route::add(['GET', 'POST'], '/createtel', [Controller\Site::class, 'createtel']);
+Route::add(['GET', 'POST'], '/view-phone', [Controller\Site::class, 'viewPhone']);
 Route::add(['GET', 'POST'], '/viewdiv', [Controller\Site::class, 'viewdiv']);
 Route::add(['GET', 'POST'], '/viewdivroom', [Controller\Site::class, 'viewdivroom']);
 Route::add(['GET', 'POST'], '/viewroom', [Controller\Site::class, 'viewroom']);
-Route::add(['GET', 'POST'], '/view-phone', [Controller\Site::class, 'viewPhone']);

@@ -84,6 +84,17 @@ class Site
     {
 
         if ($request->method === 'POST') {
+            $validator = new Validator($request->all(), [
+                'room' => ['required'],
+            ], [
+                'required' => 'Поле :field пусто',
+                'unique' => 'Поле :field должно быть уникально'
+            ]);
+            //var_dump($validator->fails()); die();
+            if ($validator->fails()) {
+                return new View('site.signup',
+                    ['message' => json_encode($validator->errors(), JSON_UNESCAPED_UNICODE)]);
+            }
             Room::create($request->all());
             app()->route->redirect('/hello');
         }
@@ -183,6 +194,7 @@ class Site
     {
         if ($request->method === 'POST') {
             $division = Divisions::where('id_division', $request->get('id_division'))->first();
+
             return new View('site.viewdiv', ['telephones' => $division->telephones]);
         }
     }
@@ -191,15 +203,29 @@ class Site
     {
         if ($request->method === 'POST') {
             $division = Divisions::where('id_division', $request->get('id_division'))->first();
-            return new View('site.viewdivroom', ['telephones' => $division->telephones]);
+            var_dump($division->telephones->count());
+            $countAbonents = 0;
+            foreach ($division->telephones as $telephone) {
+                $countAbonents += $telephone->abonents->count();
+            }
+            var_dump($countAbonents);
+
+            return new View('site.viewdivroom');
         }
+        app()->route->redirect('/viewdivroom');
     }
 
     public function viewroom(Request $request): string
     {
         if ($request->method === 'POST') {
-            $division = Divisions::where('id_division', $request->get('id_division'))->first();
-            return new View('site.viewroom', ['telephones' => $division->telephones]);
+            $room = Room::where('room_num', $request->get('room_num'))->first();
+            var_dump($room->telephones->count());
+            $countAbonents = 0;
+            foreach ($room->telephones as $telephone) {
+                $countAbonents += $telephone->abonents->count();
+            }
+            var_dump($countAbonents);
+            return new View('site.viewroom');
         }
     }
 }

@@ -32,9 +32,8 @@ if (app()->auth->user()->id_role == '0'):?>
 
         <form class="authform" method="post" action="<?= app()->settings->getRootPath() ?>/view-phone">
             <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
-            <label class="select" for="room">Пользователь
+            <label class="select" for="abonent">Пользователь
                 <select name="abonent">
-                    <option value="class"></option>
                     <?php
 
                     foreach ($abonents as $abonent) {
@@ -43,7 +42,7 @@ if (app()->auth->user()->id_role == '0'):?>
                     ?>
                 </select>
             </label>
-            <button type="submit">Просмотр</button
+            <button type="submit">Просмотр</button>
         </form>
 
     </div>
@@ -54,14 +53,14 @@ if (app()->auth->user()->id_role == '0'):?>
         <form class="authform" method="post" action="<?= app()->settings->getRootPath() ?>/viewdivroom">
             <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
             <label class="select" for="room">Подразделение
-                <select id="telephone" name="id_division">
+                <select  name="id_division">
                     <?php
                     foreach ($divisions as $division) {
                         echo "<option label='$division->title'>$division->id_division</option>";
                     }
                     ?>
                 </select>
-                <select id="type" name="view">
+                <select id="" name="">
                     <?php
                     foreach ($types as $type) {
                         echo "<option label='$type->room_type'>$type->id_room_type</option>";
@@ -70,9 +69,8 @@ if (app()->auth->user()->id_role == '0'):?>
                 </select>
             </label>
 
-            <button>Просмотр</button>
+            <button type="submit">Просмотр</button>
         </form>
-
     </div>
 
     <div class="func"><h2 class="funch2">Выбор пользователей по помещениям</h2>
